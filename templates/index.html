@@ -1,0 +1,66 @@
+{% extends 'accounts/base.html' %}
+{% block content %}
+
+
+<div class="h-100 d-flex align-items-center justify-content-center" >
+    <a class="btn btn-primary" href="{% url 'accounts:logout' %}">Logout</a>
+</div>
+
+
+<div class="row">
+    <div class="col">
+        <section class="signup">
+            <div class="container">
+                <div class="signup-content signup-form">
+                    <h2 class="form-title">Profile</h2>
+
+                    <div class="h-100 d-flex align-items-center justify-content-center">
+                        <img class="mb-2 " style="max-height: 100px; max-width: 100px;" src="media/{{user.img}}" alt="profile picture">
+                    </div>
+                    Name
+                    <div class="mb-2 form-input">
+                        <h5>{{user.name}}</h5>
+                    </div>
+                    Age
+                    <div class="mb-2 form-input">
+                        <h5>{{age}}</h5>
+                    </div>
+                    Mobile Number 
+                    <div class="mb-2 form-input">
+                        <h5>{{user.phone}}</h5>
+                    </div>
+                    Email
+                    <div class="mb-2 form-input">
+                        <h5>{{user.email}}</h5>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+    <div class="col">
+        <section class="signup">
+            <div class="container">
+                <div class="signup-content">
+                    <form method="POST" enctype="multipart/form-data" id="signup-form" class="signup-form">
+                        {% csrf_token %}
+                        <h2 class="form-title">Update Profile</h2>
+                        {% for field in form %}
+                        <div class="form-group">
+                            {{ field }}
+                        </div>
+                        {% endfor %}
+                        <div class="form-group">
+                            <input type="submit" name="submit" id="submit" class="form-submit" value="Update"/>
+                        </div>
+                    </form>
+                    {% include 'accounts/messages.html' %}
+                </div>
+            </div>
+        </section>
+    </div>
+</div>
+
+
+
+
+{% endblock content %}
